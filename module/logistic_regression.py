@@ -1,9 +1,10 @@
 
 import numpy as np
 
+# for classifying binary values
 
-def sigmoid(x):
-    return (1/(1+np.exp(-x)))
+
+# for classifying multi class values
 
 
 def softmax(x):
@@ -37,6 +38,10 @@ class LogisticRegression():
         return y_pred
 
 
+def sigmoid(x):
+    return (1/(1+np.exp(-x)))
+
+
 class LogisticRegressionMulti():
     def __init__(self, lr=0.1, n_iter=1000, lmd=0.1):
         self.learn = lr
@@ -47,8 +52,7 @@ class LogisticRegressionMulti():
 
     def fit(self, X, y):
         self.classes = np.unique(y)
-        X = np.insert(X, 0, 1, axis=1)
-
+        X = np.insert(X, 0, 1, axis=1)  # adding bias value in data set
         self.weight = np.zeros((X.shape[1], len(self.classes)))
         for _ in range(self.n_iter):
             score = np.dot(X, self.weight)
@@ -57,6 +61,12 @@ class LogisticRegressionMulti():
             dw[1:] += ((self.lmd)/len(y))*self.weight[1:]
             self.weight = self.weight - self.learn*dw
 
+    def predict(self, X):
+        X = np.insert(X, 0, 1, axis=1)
+        linear = np.dot(X, self.weight)
+        pred = softmax(linear)
+        return (np.argmax(pred, axis=1))
+
     def onehot(self, y):
         num_classes = len(self.classes)
         encoded = np.zeros((len(y), num_classes))
@@ -64,9 +74,3 @@ class LogisticRegressionMulti():
             class_index = np.where(self.classes == c)[0][0]
             encoded[i, class_index] = 1
         return encoded
-
-    def predict(self, X):
-        X = np.insert(X, 0, 1, axis=1)
-        linear = np.dot(X, self.weight)
-        pred = softmax(linear)
-        return (np.argmax(pred, axis=1))

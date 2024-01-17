@@ -1,6 +1,6 @@
 from sklearn.model_selection import train_test_split
 from sklearn import datasets
-from logistic_regression import LogisticRegressionMulti
+from module.logistic_regression import LogisticRegressionMulti
 import numpy as np
 
 iris = datasets.load_breast_cancer()
