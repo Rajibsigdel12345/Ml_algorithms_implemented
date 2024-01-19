@@ -63,11 +63,11 @@ The hypothesis function $\( h_\theta(x) \) \$ is the sigmoid of a linear combina
 
 The cost function for logistic regression is the negative log likelihood:
 
-$\ (J(\theta) = -\frac{1}{m} \sum_{i=1}^{m} \left[ y^{(i)} \log(h_\theta(x^{(i)})) + (1 - y^{(i)}) \log(1 - h_\theta(x^{(i)})) \right] \$
+$\ (J(\theta) = -\frac{1}{m} \Sigma_{i=1}^{m} \left[ y^{(i)} \log(h_\theta(x^{(i)})) + (1 - y^{(i)}) \log(1 - h_\theta(x^{(i)})) \right] \$
 
 To optimize parameters $\( \theta \) \$, use gradient descent:
 
-$\theta_j = \theta_j - \alpha \frac{1}{m} \sum_{i=1}^{m} \left( h_\theta(x^{(i)}) - y^{(i)} \right) x_j^{(i)} \$
+$\theta_j = \theta_j - \alpha \frac{1}{m} \Sigma_{i=1}^{m} \left( h_\theta(x^{(i)}) - y^{(i)} \right) x_j^{(i)} \$
 
 where $\( \alpha \)\$ is the learning rate.
 
@@ -76,17 +76,17 @@ where $\( \alpha \)\$ is the learning rate.
 
 For multiclass classification, logistic regression is extended using the softmax function. The hypothesis function for class $\(k\)\$ is given by:
 
-$\ P(Y = k | X) = \frac{e^{\theta_k^T x}}{\sum_{j=1}^{K} e^{\theta_j^T x}} \$
+$\ P(Y = k | X) = \frac{e^{\theta_k^T x}}{\Sigma_{j=1}^{K} e^{\theta_j^T x}} \$
 
 #### Mathematical Derivation:
 
 The softmax function assigns probabilities to each class, and the cost function is the cross-entropy loss:
 
-$\ J(\theta) = -\frac{1}{m} \sum_{i=1}^{m} \sum_{k=1}^{K} \left[ y_k^{(i)} \log\left(\frac{e^{\theta_k^T x^{(i)}}}{\sum_{j=1}^{K} e^{\theta_j^T x^{(i)}}}\right) \right] \$
+$\ J(\theta) = -\frac{1}{m} \Sigma_{i=1}^{m} \Sigma_{k=1}^K \left[ y_k^{(i)} \log\left(\frac{e^{\theta_k^T x^{(i)}}}{\Sigma_{j=1}^{K} e^{\theta_j^T x^{(i)}}}\right) \right] \$
 
 To optimize parameters $\( \theta \) \$, use gradient descent:
 
-$\ \theta_{ij} = \theta_{ij} - \alpha \frac{1}{m} \sum_{i=1}^{m} \left( P(Y^{(i)} = j | X^{(i)}) - \mathbb{1}\{y^{(i)} = j\} \right) x_i \$
+$\ \theta_{ij} = \theta_{ij} - \alpha \frac{1}{m} \Sigma_{i=1}^m \left( P(Y^{(i)} = j | X^{(i)}) - \mathbb{1}\{y^{(i)} = j\} \right) x_i \$
 
 where $\( \alpha \)\$ is the learning rate, $\( K \)\$ is the number of classes, $\( \mathbb{1}\{\cdot\} \)\$ is the indicator function.
 
@@ -99,8 +99,8 @@ Gaussian Discriminative Analysis assumes normal distribution within each class. 
 For each class $\ (k\) \$, GDA estimates the following parameters:
 
 - Prior probability: $\ P(Y = k) = \frac{{\text{Number of samples in class } k}}{{\text{Total number of samples}}} \ \$
-- Mean vector: $\( \mu_k = \frac{1}{{\text{Number of samples in class } k}} \sum_{i=1}^{m} \mathbb{1}\{y^{(i)} = k\} x^{(i)} \) \$
-- Covariance matrix: $\( \Sigma_k = \frac{1}{{\text{Number of samples in class } k}} \sum_{i=1}^{m} \mathbb{1}\{y^{(i)} = k\} (x^{(i)} - \mu_k)(x^{(i)} - \mu_k)^T \) \$
+- Mean vector: $\( \mu_k = \frac{1}{{\text{Number of samples in class } k}} \Sigma_{i=1}^{m} \mathbb{1}\{y^{(i)} = k\} x^{(i)} \) \$
+- Covariance matrix: $\( \Sigma_k = \frac{1}{{\text{Number of samples in class } k}} \Sigma_{i=1}^{m} \mathbb{1}\{y^{(i)} = k\} (x^{(i)} - \mu_k)(x^{(i)} - \mu_k)^T \) \$
 
 
 
@@ -115,8 +115,8 @@ To use the Gaussian Discriminative Analysis model:
 2. **Fit the model:**
 
     - Prior probability: $\ P(Y = k) = \frac{{\text{Number of samples in class } k}}{{\text{Total number of samples}}} \$
-    - Mean vector: $\ \mu_k = \frac{1}{{\text{Number of samples in class } k}} \sum_{i=1}^{m} \mathbb{1}\{y^{(i)} = k\} x^{(i)} \$
-    - Covariance matrix: $\ \Sigma_k = \frac{1}{{\text{Number of samples in class } k}} \sum_{i=1}^{m} \mathbb{1}\{y^{(i)} = k\} (x^{(i)} - \mu_k)(x^{(i)} - \mu_k)^T \$
+    - Mean vector: $\ \mu_k = \frac{1}{{\text{Number of samples in class } k}} \Sigma_{i=1}^{m} \mathbb{1}\{y^{(i)} = k\} x^{(i)} \$
+    - Covariance matrix: $\ \Sigma_k = \frac{1}{{\text{Number of samples in class } k}} \Sigma_{i=1}^{m} \mathbb{1}\{y^{(i)} = k\} (x^{(i)} - \mu_k)(x^{(i)} - \mu_k)^T \$
 
 3. **Make predictions:**
 
