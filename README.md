@@ -6,6 +6,8 @@ This repository contains Python implementations of following machine learning al
 2. Logistic Regression
 3. Multiclass Logistic Regression using Softmax
 4. Gaussian Discriminative Analysis
+5. Decision Trees
+6. Random Forest
 
 ## 1. Linear Regression
 
