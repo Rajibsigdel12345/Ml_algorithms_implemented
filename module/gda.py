@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class GaussianDiscriminativeAnalysis():
+class GaussianDiscriminantAnalysis():
     def __init__(self):
         self.priors_class = None
         self.covariance_class = None
@@ -25,7 +25,6 @@ class GaussianDiscriminativeAnalysis():
             class_score = []
             for priors, mean, covar in zip(self.priors_class, self.means_class,
                                            self.covariance_class):
-                # print([priors, mean, covar])
                 log_likelihood = -0.5 * \
                     (np.log(np.linalg.det(covar)) +
                      np.dot(np.dot((x-mean).T, np.linalg.inv(covar)), (x-mean)))

@@ -18,7 +18,6 @@ class LinearRegression():
             predict = np.dot(X, self.weight) + self.bias
             # Gradient descent gives the new adjustmet in weight parameter
             dw = (1/n_samples)*np.dot(X.T, (predict-y))
-            # average of the error gives bias
             db = (1/n_samples)*np.sum(predict-y)
             self.weight = self.weight - self.learn*dw
             self.bias = self.bias - self.learn*db
