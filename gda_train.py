@@ -19,5 +19,4 @@ classifier = GaussianDiscriminantAnalysis()
 classifier.fit(X_train, y_train)
 pred = classifier.predict(X_test)
 
-
 print(np.sum(y_test == pred)/len(y_test))

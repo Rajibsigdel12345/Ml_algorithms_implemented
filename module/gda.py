@@ -29,6 +29,5 @@ class GaussianDiscriminantAnalysis():
                     (np.log(np.linalg.det(covar)) +
                      np.dot(np.dot((x-mean).T, np.linalg.inv(covar)), (x-mean)))
                 class_score.append(np.log(priors)+log_likelihood)
-
             predictions.append(np.argmax(class_score))
         return np.array(predictions)
