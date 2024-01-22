@@ -15,6 +15,7 @@ class LinearRegression():
         self.weight = np.zeros(n_features)
 
         for _ in range(n_iter):
+            # Linear equation with bias addes
             predict = np.dot(X, self.weight) + self.bias
             # Gradient descent gives the new adjustmet in weight parameter
             dw = (1/n_samples)*np.dot(X.T, (predict-y))
