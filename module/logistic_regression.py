@@ -1,14 +1,6 @@
 
 import numpy as np
 
-# for classifying binary values
-
-
-# for classifying multi class values
-
-
-
-
 
 class LogisticRegression():
     def __init__(self, lr=0.0001, n_iter=1000):
@@ -50,20 +42,26 @@ class LogisticRegressionMulti():
 
     def fit(self, X, y):
         self.classes = np.unique(y)
-        X = np.insert(X, 0, 1, axis=1)                                    # adding bias value in data set
-        self.weight = np.zeros((X.shape[1], len(self.classes)))           #Weight matrix for providing weight of each class for each features
+        # adding bias value in data set
+        X = np.insert(X, 0, 1, axis=1)
+        # Weight matrix for providing weight of each class for each features
+        self.weight = np.zeros((X.shape[1], len(self.classes)))
         for _ in range(self.n_iter):
-            score = np.dot(X, self.weight)  
-            predict = softmax(score)                                      #softfax function to calculate probability for each class of X
-            dw = np.dot(X.T, (predict - self.one_hot_encode(y)))/len(y)   #gradient descent to calculate new weight
-            dw[1:] += ((self.lmd)/len(y))*self.weight[1:]                 #regularizing the parameters except at index 0
+            score = np.dot(X, self.weight)
+            # softfax function to calculate probability for each class of X
+            predict = softmax(score)
+            dw = np.dot(X.T, (predict - self.one_hot_encode(y))) / \
+                len(y)  # gradient descent to calculate new weight
+            # regularizing the parameters except at index 0
+            dw[1:] += ((self.lmd)/len(y))*self.weight[1:]
             self.weight = self.weight - self.learn*dw
 
     def predict(self, X):
-        X = np.insert(X, 0, 1, axis=1)                                    #adding Bias in the test features
+        X = np.insert(X, 0, 1, axis=1)  # adding Bias in the test features
         linear = np.dot(X, self.weight)
-        pred = softmax(linear)                                            #probability score
-        return (np.argmax(pred, axis=1))                                  #returning the position that caused max probability ie argmax
+        pred = softmax(linear)  # probability score
+        # returning the position that caused max probability ie argmax
+        return (np.argmax(pred, axis=1))
 
     def one_hot_encode(self, y):
         num_classes = len(self.classes)
@@ -72,6 +70,7 @@ class LogisticRegressionMulti():
             class_index = np.where(self.classes == c)[0][0]
             encoded[i, class_index] = 1
         return encoded
+
 
 def softmax(x):
     exp_x = np.exp(x - np.max(x, axis=1, keepdims=True))
